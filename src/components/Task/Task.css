@@ -1,0 +1,29 @@
+/* Tasks */
+.task__text {
+    margin-bottom: 0;
+  }
+  
+  .task {
+    margin-bottom: 16px;
+  }
+  
+  .task--complete .task__text {
+    text-decoration: line-through;
+  }
+  
+  .all-tasks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin: 0 auto;
+    max-width: 700px;
+  }
+  
+  .incomplete-tasks, .complete-tasks {
+    flex: 1 1 auto;
+  }
+  
+  .task-list {
+    list-style-type: none;
+    padding-inline-start: 0;
+  }

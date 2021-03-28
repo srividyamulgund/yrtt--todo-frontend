@@ -1,23 +1,33 @@
-import logo from './logo.svg';
+/* eslint-disable react/react-in-jsx-scope */
 import './App.css';
+import AddTask from './components/AddTask/AddTask'
+import Task from './components/Task/Task'
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <header className="header">
+        <h1 className="heading">To Do!</h1>
+        <AddTask />
+        <p className="outstanding-tasks">You have 3 tasks to complete</p>
       </header>
+      <main className="all-tasks">
+        <section className="incomplete-tasks">
+          <h2 className="heading">Tasks to do:</h2>
+          <ul className="task-list">
+            <Task complete={false} />
+            <Task complete={false} />
+            <Task complete={false} />
+          </ul>
+        </section>
+        <section className="complete-tasks">
+          <h2 className="heading">Complete tasks:</h2>
+          <ul className="task-list">
+            <Task complete={true} />
+            <Task complete={true} />
+          </ul>
+        </section>
+      </main>
     </div>
   );
 }
