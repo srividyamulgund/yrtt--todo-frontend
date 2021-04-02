@@ -1,32 +1,34 @@
 /* eslint-disable react/react-in-jsx-scope */
+import { useState } from 'react';
 import './App.css';
-import AddTask from './components/AddTask/AddTask'
-import Task from './components/Task/Task'
+import TaskList from './components/TaskList/TaskList';
+import Task from './components/Task/Task';
+import Header from './components/Header/Header';
 
 function App() {
+  const [tasks, setTasks] = useState(
+    [{ text: "Buy cat food", completed: false, date: "2019-09-18", id: "001" },
+    { text: "Wash dishes", completed: true, date: "2019-09-24", id: "002" },
+    { text: "Make oat milk", completed: false, date: "2019-09-27", id: "003" },
+    { text: "Buy dog food", completed: false, date: "2019-09-18", id: "004" },
+    { text: "Hang the clothes", completed: true, date: "2019-09-24", id: "005" },
+    { text: "Buy milk and yogurt", completed: false, date: "2019-09-27", id: "006" }
+    ]);
+
+  const deleteTask = id => {
+    const updatedTasks = tasks.filter(task => task.id !== id);
+    setTasks(updatedTasks);
+  }
+
+  const incompleteTasks = tasks.filter(task => !task.completed);
+  const completedTasks = tasks.filter(task => task.completed);
+
   return (
     <div className="App">
-      <header className="header">
-        <h1 className="heading">To Do!</h1>
-        <AddTask />
-        <p className="outstanding-tasks">You have 3 tasks to complete</p>
-      </header>
+      <Header taskCount={incompleteTasks.length} />
       <main className="all-tasks">
-        <section className="incomplete-tasks">
-          <h2 className="heading">Tasks to do:</h2>
-          <ul className="task-list">
-            <Task complete={false} />
-            <Task complete={false} />
-            <Task complete={false} />
-          </ul>
-        </section>
-        <section className="complete-tasks">
-          <h2 className="heading">Complete tasks:</h2>
-          <ul className="task-list">
-            <Task complete={true} />
-            <Task complete={true} />
-          </ul>
-        </section>
+        <TaskList deleteTask={deleteTask} tasks={incompleteTasks} status={"incomplete"} />
+        <TaskList deleteTask={deleteTask} tasks={completedTasks} status={"complete"} />
       </main>
     </div>
   );
